@@ -33,7 +33,8 @@ var model = {
 var octopus = {
 init: function() {
   model.currentCat = model.Cats[0];
-  console.log(model.currentCat);
+  
+  
   catListView.init();
   view.init();
 },
@@ -66,28 +67,25 @@ var view = {
     this.name = document.getElementById('catName');
     this.image = document.getElementById('catImage');
     this.counter = document.getElementById('catCounter');
+    
+    this.image.addEventListener('click',function(){
+    octopus.increaseCounter();
+});
 // event  listener
 
   this.render();
 },
 render: function() {
   var currentCat = octopus.getcurrentCat();
-  this.name.innerText = currentCat.catName;
+  this.name.textContent = currentCat.catName;
   this.image.src = currentCat.src;
-  this.counter.innerText = currentCat.catCounter;
-
-  this.image.addEventListener('click',function(){
-    octopus.increaseCounter();
-});
+  this.counter.textContent = currentCat.catCounter;
 }
 };
 var catListView = {
   init: function() {
-    var currentCat = octopus.getcurrentCat();
-   currentCat.name = this.name.innerText;
-    this.image.src = currentCat.src;
-    this.counter.innerText = currentCat.catCounter;
     this.catList = document.getElementById('catList');
+    
     this.render();
   },
    render: function() {
@@ -96,7 +94,7 @@ var catListView = {
      var name;
      var cats = octopus.getCats;
 
-     this.catList.innertext = '';
+     this.catList.innerHTML = '';
 
 
   for(i = 0; i<cats.length;i ++ ) {
@@ -104,7 +102,7 @@ var catListView = {
   cat = cats[i];
   // adds cat name to DOM
   name = document.createElement('li');
-  name.innerText = cat.name;
+  name.textContent = cat.name;
   // Event listner for list
 
   $('li').addEventListener('click', function() { return function () {
